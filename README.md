@@ -6,8 +6,6 @@ A **minimal, NumPy‑powered implementation of Gillespie’s Stochastic Simulati
 
 ## Features
 
-* **Pure Python + NumPy/SciPy** – no C/Cython to compile.
-* Vectorised propensity calculation for small/medium networks.
+* **Pure Python + NumPy/SciPy**
+* Vectorised propensity calculation.
 * Returns *times*, *species counts* and *reaction indices* in NumPy arrays — ready for plotting.
-* Lightweight: only depends on `numpy` and `scipy`.
-
