@@ -39,7 +39,7 @@ def my_gillespie(init, rates, stoch_subst, stoch_prods, tmax, nrmax):
     # --------------------------
     # main while loop
     # --------------------------
-    while react_count < nrmax:
+    while react_count < nrmax and current_t < tmax:
         # ****************************
         # step 1: calculate ai and a0
         # ****************************

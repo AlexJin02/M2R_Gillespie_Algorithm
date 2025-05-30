@@ -3,7 +3,7 @@ from scipy.special import factorial
 from functions.choose_t_r import choose_t_r
 from functions.binom import binom
 import matplotlib.pyplot as plt
-from functions.SSA import my_gillespie
+from functions.my_gillespie import my_gillespie
 
 
 # parameters
