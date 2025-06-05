@@ -22,7 +22,7 @@ stoch_prods = np.array([
     [0, 1, 0, 0],
 ])
 tmax, nrmax = 600.0, 200000
-init = np.array([0, 0, 0, 0])
+init = np.array([200, 100, 0, 0])
 
 ts, state, rxn_id = my_gillespie(
     init.copy(), rates, stoch_subst, stoch_prods, tmax, nrmax)
@@ -57,6 +57,10 @@ D_det = np.zeros(n_steps)
 time_det = np.linspace(0, tmax, n_steps)
 
 # initial conditions already 0
+A_det[0] = init[0]
+B_det[0] = init[1]
+C_det[0] = init[2]
+D_det[0] = init[3]
 for i in range(1, n_steps):
     A = A_det[i-1]
     B = B_det[i-1]
@@ -70,6 +74,7 @@ for i in range(1, n_steps):
     B_det[i] = B + dB * dt
     C_det[i] = C + dC * dt
     D_det[i] = D + dD * dt
+
 # ---- plot ---------------------------------------------------------
 fig1, ax1 = plt.subplots()
 ax1.yaxis.set_major_locator(MaxNLocator(integer=True))

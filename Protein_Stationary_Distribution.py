@@ -20,7 +20,7 @@ stoch_prods = np.array([
     [1, 0, 0, 0],
     [0, 1, 0, 0],
 ])
-init = np.array([0, 0, 0, 0])
+init = np.array([200, 0, 0, 0])
 
 # ---------------------------------------------------------------------------
 # long SSA run -> stationary samples
