@@ -4,26 +4,30 @@ from functions.my_gillespie import my_gillespie
 from matplotlib.ticker import MaxNLocator
 
 # ---------------------------------------------------------------------------
-# model parameters (as in the paper)
+# model parameters
 # ---------------------------------------------------------------------------
 k1, k2, k3, k4 = 1e-3, 1e-2, 1.2, 1.0
 rates = np.array([k1, k2, k3, k4])
-stoch_subst = np.array([[-2,  0],
-                        [-1, -1],
-                        [0,  0],
-                        [0,  0]])
-stoch_prods = np.array([[0, 0],
-                        [0, 0],
-                        [1, 0],
-                        [0, 1]])
-init = np.array([0, 0])
+stoch_subst = np.array([
+    [-2, 0, 0, 0],
+    [-1, -1, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+])
+stoch_prods = np.array([
+    [0, 0, 1, 0],
+    [0, 0, 0, 1],
+    [1, 0, 0, 0],
+    [0, 1, 0, 0],
+])
+init = np.array([0, 0, 0, 0])
 
 # ---------------------------------------------------------------------------
 # long SSA run -> stationary samples
 # ---------------------------------------------------------------------------
 tmax = 20000.0     # total simulation time [s]
 burnin = 5000.0      # discard initial transient
-dt_sample = 1.0      # sample every 1 s
+dt_sample = 1.0      # sample every second
 
 ts, states, _ = my_gillespie(init.copy(), rates,
                              stoch_subst, stoch_prods,
@@ -57,7 +61,8 @@ H, _, _ = np.histogram2d(samples_A, samples_B,
 fig1, ax1 = plt.subplots(figsize=(6, 4.8))
 im = ax1.imshow(H.T, origin='lower',
                 extent=[-0.5, max_A + 0.5, -0.5, max_B + 0.5],
-                aspect='auto')
+                aspect='auto',
+                interpolation='nearest')
 cb = fig1.colorbar(im, ax=ax1)
 ax1.set_xlabel('number of A molecules')
 ax1.set_ylabel('number of B molecules')
