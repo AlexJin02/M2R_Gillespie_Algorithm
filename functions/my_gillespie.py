@@ -49,9 +49,9 @@ def my_gillespie(init, rates, stoch_subst, stoch_prods, tmax, nrmax):
             for j in range(len(init)):
                 if stoch_subst[i, j] == 0:    # species j not consumed in reaction i
                     continue
-                if current_species[j] <= 0:    # no molecules of that species → reaction impossible
+                if current_species[j] <= abs(stoch_subst[i, j]):    # Not enough molecules
                     hi = 0
-                    continue
+                    break
                 else:
                     # hi is calculated as the product of the binomial coefficient and factorial
                     hi *= binom(current_species[j], np.abs(stoch_subst[i, j])) * factorial(np.abs(stoch_subst[i, j]))

@@ -72,8 +72,10 @@ ts_long, states_long, r = my_gillespie(init.copy(), rates, stoch_subst, stoch_pr
 sampled = []
 idx = 0
 for t in np.arange(0, long_time):
+    # hops over all of index, stopping exactly at the last one that no later than t
     while idx + 1 < len(ts_long) and ts_long[idx+1] <= t:
         idx += 1
+    # append the A-molecule count after that last-up-to-t reaction
     sampled.append(states_long[idx, 0])
 sampled = np.array(sampled)
 
@@ -151,15 +153,17 @@ plt.tight_layout()
 plt.show()
 
 # Stationary distribution
-long_time = 100000     # seconds
+long_time = 100000
 ts_long, states_long, r = my_gillespie(init.copy(), rates, stoch_subst, stoch_prods, long_time, 1000000)
 
 # sample once per second
 sampled = []
 idx = 0
 for t in np.arange(0, long_time):
+    # hops over all of index, stopping exactly at the last one that no later than t
     while idx + 1 < len(ts_long) and ts_long[idx+1] <= t:
         idx += 1
+    # append the A-molecule count after that last-up-to-t reaction
     sampled.append(states_long[idx, 0])
 sampled = np.array(sampled)
 
