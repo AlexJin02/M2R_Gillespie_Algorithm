@@ -36,13 +36,10 @@ def my_gillespie(init, rates, stoch_subst, stoch_prods, tmax, nrmax):
     store_t[0] = current_t
     store_mols[0, :] = current_species
 
-    # --------------------------
     # main while loop
-    # --------------------------
     while react_count < nrmax and current_t < tmax:
-        # ****************************
+
         # step 1: calculate ai and a0
-        # ****************************
         a = np.ones((num_rxn, 1))   # initialise a to ones array of dimensions num_rxn,1
         for i in range(num_rxn):
             hi = 1
@@ -58,14 +55,10 @@ def my_gillespie(init, rates, stoch_subst, stoch_prods, tmax, nrmax):
             a[i] = hi * rates[i]  # save the current value of ai as hi*ci
         a0 = sum(a)  # save a0 as the sum of all a's
 
-    # ****************************
     # step 2: choose next t and r
-    # ****************************
         T, next_r = choose_t_r(a0, a)  # run choose_t_r to get the change in time and the next reaction
 
-    # ****************************
     # step 3: update and store system
-    # ****************************
         current_t += T  # update current_t by adding T
         current_species += np.transpose(stoch[next_r, :])  # update current_species
         react_count += 1  # update the reaction counter
