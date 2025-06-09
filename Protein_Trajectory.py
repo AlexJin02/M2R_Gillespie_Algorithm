@@ -22,7 +22,7 @@ stoch_prods = np.array([
     [0, 1, 0, 0],
 ])
 tmax, nrmax = 600.0, 200000
-init = np.array([200, 100, 0, 0])
+init = np.array([0, 0, 0, 0])
 
 ts, state, rxn_id = my_gillespie(
     init.copy(), rates, stoch_subst, stoch_prods, tmax, nrmax)
@@ -83,6 +83,10 @@ for rep in range(n_rep):
     ax1.step(time_grid, traj_grid_A[rep], where='post',
             label=f'run {rep + 1}')
 
+# mean of all realisations, computed once
+traj_grid_A_mean = traj_grid_A.mean(axis=0)
+ax1.plot(time_grid, traj_grid_A_mean,
+         color='black', lw=2, label='SSA mean ⟨A(t)⟩')
 ax1.plot(time_det, A_det, color='black', linestyle='--', lw=2, label='Deterministic mean $\\langle A(t) \\rangle$')
 ax1.grid(ls=':', lw=0.6)
 ax1.set_xlabel('time [s]')
@@ -99,6 +103,10 @@ for rep in range(n_rep):
     ax2.step(time_grid, traj_grid_B[rep], where='post',
             label=f'run {rep + 1}')
 
+# mean of all realisations, computed once
+traj_grid_B_mean = traj_grid_B.mean(axis=0)
+ax2.plot(time_grid, traj_grid_B_mean,
+         color='black', lw=2, label='SSA mean ⟨B(t)⟩')
 ax2.plot(time_det, B_det, color='black', linestyle='--', lw=2, label='Deterministic mean $\\langle B(t) \\rangle$')
 ax2.grid(ls=':', lw=0.6)
 ax2.set_xlabel('time [s]')
@@ -114,6 +122,10 @@ for rep in range(n_rep):
     ax3.step(time_grid, traj_grid_C[rep], where='post',
             label=f'run {rep + 1}')
 
+# mean of all realisations, computed once
+traj_grid_C_mean = traj_grid_C.mean(axis=0)
+ax3.plot(time_grid, traj_grid_C_mean,
+         color='black', lw=2, label='SSA mean ⟨C(t)⟩')
 ax3.plot(time_det, C_det, color='black', linestyle='--', lw=2, label='Deterministic mean $\\langle C(t) \\rangle$')
 ax3.grid(ls=':', lw=0.6)
 ax3.set_ylabel('C molecules')
@@ -128,6 +140,10 @@ for rep in range(n_rep):
     ax4.step(time_grid, traj_grid_D[rep], where='post',
             label=f'run {rep + 1}')
 
+# mean of all realisations, computed once
+traj_grid_D_mean = traj_grid_D.mean(axis=0)
+ax4.plot(time_grid, traj_grid_D_mean,
+         color='black', lw=2, label='SSA mean ⟨D(t)⟩')
 ax4.plot(time_det, D_det, color='black', linestyle='--', lw=2, label='Deterministic mean $\\langle D(t) \\rangle$')
 ax4.grid(ls=':', lw=0.6)
 ax4.set_xlabel('time [s]')
